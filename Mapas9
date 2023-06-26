@@ -1,0 +1,27 @@
+package main
+
+import "fmt"
+
+func gerarSequenciaFibonacci(n int) map[int]int {
+	sequencia := make(map[int]int)
+
+	a, b := 0, 1
+
+	for i := 0; a <= n; i++ {
+		sequencia[i] = a
+		a, b = b, a+b
+	}
+
+	return sequencia
+}
+
+func main() {
+	n := 100
+
+	sequenciaFibonacci := gerarSequenciaFibonacci(n)
+
+	fmt.Println("Sequência de Fibonacci:")
+	for indice, numero := range sequenciaFibonacci {
+		fmt.Printf("Índice: %d, Número: %d\n", indice, numero)
+	}
+}
