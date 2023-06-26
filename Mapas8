@@ -1,0 +1,38 @@
+package main
+
+import "fmt"
+
+func calcularPagamentos(contas map[string]float64) map[string]float64 {
+	totalGasto := 0.0
+
+	// Calcula o total gasto na conta
+	for _, valor := range contas {
+		totalGasto += valor
+	}
+
+	// Calcula o valor que cada pessoa deve receber ou pagar
+	valorPorPessoa := totalGasto / float64(len(contas))
+	pagamentos := make(map[string]float64)
+
+	for pessoa, valorGasto := range contas {
+		valorDevido := valorGasto - valorPorPessoa
+		pagamentos[pessoa] = valorDevido
+	}
+
+	return pagamentos
+}
+
+func main() {
+	contas := map[string]float64{
+		"João":   100.0,
+		"Maria":  50.0,
+		"Carlos": 75.0,
+	}
+
+	pagamentos := calcularPagamentos(contas)
+
+	fmt.Println("Valor que cada pessoa deve receber ou pagar:")
+	for pessoa, valor := range pagamentos {
+		fmt.Printf("%s: R$%.2f\n", pessoa, valor)
+	}
+}
