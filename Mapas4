@@ -1,0 +1,36 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
+
+func ordenarPalavra(palavra string) string {
+	runes := []rune(palavra)
+	sort.Slice(runes, func(i, j int) bool {
+		return runes[i] < runes[j]
+	})
+	return string(runes)
+}
+
+func agruparAnagramas(palavras []string) map[string][]string {
+	anagramas := make(map[string][]string)
+
+	for _, palavra := range palavras {
+		chave := ordenarPalavra(palavra)
+		anagramas[chave] = append(anagramas[chave], palavra)
+	}
+
+	return anagramas
+}
+
+func main() {
+	palavras := []string{"amor", "roma", "carro", "corar", "casa", "saco", "rato", "tora"}
+
+	gruposAnagramas := agruparAnagramas(palavras)
+
+	for _, grupo := range gruposAnagramas {
+		fmt.Println(grupo)
+	}
+}
