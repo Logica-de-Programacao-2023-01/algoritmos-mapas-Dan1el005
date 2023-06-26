@@ -1,0 +1,30 @@
+package main
+
+import "fmt"
+
+func somarContagens(contagens []map[string]int) map[string]int {
+	soma := make(map[string]int)
+
+	for _, contador := range contagens {
+		for palavra, quantidade := range contador {
+			soma[palavra] += quantidade
+		}
+	}
+
+	return soma
+}
+
+func main() {
+	contagens := []map[string]int{
+		{"hello": 2, "world": 1},
+		{"hello": 1, "openai": 3},
+		{"world": 2, "openai": 1},
+	}
+
+	somaContagens := somarContagens(contagens)
+
+	fmt.Println("Soma das contagens:")
+	for palavra, quantidade := range somaContagens {
+		fmt.Printf("%s: %d\n", palavra, quantidade)
+	}
+}
